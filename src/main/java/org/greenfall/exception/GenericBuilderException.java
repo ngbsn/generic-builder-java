@@ -1,6 +1,6 @@
-package org.punto11.exception;
+package org.greenfall.exception;
 
-public class GenericBuilderException extends RuntimeException{
+public class GenericBuilderException extends Exception {
     public GenericBuilderException(String message) {
         super(message);
     }
