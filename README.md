@@ -10,6 +10,8 @@ The GenericObjectBuilder.andThen() takes in 2 arguments:
 If instead of a NestedObject, there is a simple property to be set, GenericObjectBuilder has an overloaded method to accept the simple property as 2nd argument.
 
 # Usage
+
+```
 String value = "Hello world";
 ComplexObject complexObject = GenericObjectBuilder.of(ComplexObject::new)
                              .andThen(ComplexObject::setNestedObjectA,
@@ -17,4 +19,7 @@ ComplexObject complexObject = GenericObjectBuilder.of(ComplexObject::new)
                              .andThen(ComplexObject::setNestedObjectB,
                                      GenericObjectBuilder.of(NestedObjectB::new).andThen(NestedObjectB::setB, value))
                              .build();
+```                           
+                           
+                        
                 
