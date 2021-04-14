@@ -9,12 +9,12 @@ import java.util.function.Supplier;
 
 public class GenericObjectBuilder<T> {
 
-    private final Supplier<T> instantiator;
 
-    private final List<Consumer<T>> parseBuilders = new ArrayList<>();
+    private final List<Consumer<T>> propSetters = new ArrayList<>();
+    private final Supplier<T> constructor;
 
-    public GenericObjectBuilder(Supplier<T> instantiator) {
-        this.instantiator = instantiator;
+    public GenericObjectBuilder(Supplier<T> constructor) {
+        this.constructor = constructor;
     }
 
     public static <T, E extends Exception> GenericObjectBuilder<T> of(Supplier<T> instantiator) {
@@ -23,21 +23,20 @@ public class GenericObjectBuilder<T> {
 
     public <U, E extends Exception> GenericObjectBuilder<T> andThen(CustomBiConsumer<T, U, E> biConsumer, GenericObjectBuilder<U> builder) {
         Consumer<T> c = instance -> biConsumer.accept(instance, builder.build());
-        parseBuilders.add(c);
+        propSetters.add(c);
         return this;
     }
 
     public <R, E extends Exception> GenericObjectBuilder<T> andThen(CustomBiConsumer<T, R, E> biConsumer, R r) {
         Consumer<T> c = instance -> biConsumer.accept(instance, r);
-        parseBuilders.add(c);
+        propSetters.add(c);
         return this;
     }
 
-
     public T build() {
-        T object = instantiator.get();
-        parseBuilders.forEach(modifier -> modifier.accept(object));
-        parseBuilders.clear();
+        T object = constructor.get();
+        propSetters.forEach(propSetter -> propSetter.accept(object));
+        propSetters.clear();
         return object;
     }
 }
