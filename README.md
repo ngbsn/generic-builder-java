@@ -9,6 +9,8 @@ The GenericObjectBuilder.andThen() takes in 2 arguments:
 
 If instead of a NestedObject, there is a simple property to be set, GenericObjectBuilder has an overloaded method to accept the simple property as 2nd argument.
 
+The builder uses a extended BiConsumer functional Interface that catches checked Exceptions and throws RuntimeExceptions.
+
 # Usage
 
 ```
