@@ -1,5 +1,5 @@
 # Description
-Implementation of builder pattern for building complex objects containing nested objects. 
+Sample Implementation of builder pattern for building complex objects containing nested objects. 
 
 The GenericObjectBuilder.of() takes in 1 argument - the reference to constructor of the ComplexObject.
 
